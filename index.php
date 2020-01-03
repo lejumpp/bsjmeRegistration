@@ -32,6 +32,7 @@
             {
                 color: black;
             }
+            
         </style>
     </head>
     <body>
@@ -152,7 +153,7 @@
                                                     echo"
                                                     <div class='form-check-inline'>
                                                         <label class='form-check-label'>
-                                                            <input type='radio' class='form-check-input' name='question".$row["id"]."'  value='".strtolower($choice)."'>".ucfirst(strtolower($choice))."
+                                                            <input type='radio' checked class='form-check-input' name='question".$row["id"]."'  value='".strtolower($choice)."'>".ucfirst(strtolower($choice))."
                                                         </label>
                                                     </div>
                                                     ";
@@ -175,7 +176,7 @@
                                             elseif($row["questionType"]=="TEXT" || $row["questionType"]=="TEXTAREA" )
                                             {
                                                 echo"
-                                                <textarea style='overflow:auto;resize:none' class='form-control' rows='2' name='question".$row["id"]."' ></textarea>
+                                                <textarea style='overflow:auto;resize:none' class='form-control' rows='1' name='question".$row["id"]."' ></textarea>
                                                 ";
                                             }
                                             elseif($row["questionType"]=="LIST" )
@@ -305,7 +306,7 @@
             {
                 // This function will figure out which tab to display
                 var x = document.getElementsByClassName("tab");
-                // Exit the function if any field in the current tab is invalid:
+                
                 // Hide the current tab:
                 x[currentTab].style.display = "none";
                 // Increase or decrease the current tab by 1:
@@ -319,6 +320,7 @@
                 // Otherwise, display the correct tab:
                 showTab(currentTab);
             }
+
         </script>
     </body>
 </html>

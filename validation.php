@@ -5,10 +5,11 @@
         $errorFlag=null;
         foreach($_POST as $key => $value)
         {
-            //echo $key."<br>";
+            ///echo $key."<br>";
             if(empty(test_input($value)))
             {
                 echo"A field is empty ".$key."<br>";
+                var_dump($key);
                 $errorFlag=1;
             }
             else
@@ -16,9 +17,10 @@
                 $$key = test_input($value);
             }
         }
-        if($errorFlag==1){
+        if($errorFlag==1)
+        {
             echo"An error has occured";
-            $errorFlag=null;
+            //$errorFlag=null;
         }
         else
         {
@@ -34,15 +36,11 @@
             if(!filter_var($companyWebsite, FILTER_VALIDATE_URL)){
                 $errorFlag=1;
             }
-        }
-        if($errorFlag==1)
-        {
-            echo"An error has occured";
-        }
-        else //this else is for the insertion function in database_functions
-        {
-            insert_client($conn,$trn,$companyName,$clientName,$companyAddress,$companyCounty,$companyParish,
-                            $companyCity,$companyNumber,$companyEmail,$companyWebsite);
+            else //this else is for the insertion function in database_functions
+            {
+                insert_client($conn,$trn,$companyName,$clientName,$companyAddress,$companyCounty,$companyParish,
+                                $companyCity,$companyNumber,$companyEmail,$companyWebsite);
+            }
         }
     }
 
@@ -52,5 +50,4 @@
         $data = htmlspecialchars($data);
         return $data;
     }
-
 ?>
