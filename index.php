@@ -184,9 +184,8 @@
                                                 $choices = json_decode($row["questionChoice"],true);
                                                 echo"
                                                 <div class='form-group'>
-                                                    <select class='form-control' id='question".$row["id"]."'>
+                                                    <select class='form-control' name='question".$row["id"]."'>
                                                         <option value='' selected>Select One</option>";
-                                                        
                                                         foreach($choices as $choice)
                                                         {
                                                             echo"

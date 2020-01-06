@@ -48,8 +48,8 @@
         }
         else
         {
-            $sql = "INSERT INTO `pending_clients` (`ID`, `trn`, `companyName`, `clientName`, `clientAddress`, `clientCounty`, `clientParish`, `clientCity`, `clientContact`, `clientEmail`, `clientWebsite`, `attempts`) 
-            VALUES (NULL, '$trn', '$companyName', '$clientName', '$companyAddress', '$companyCounty', '$companyParish', '$companyCity',  '$companyNumber', '$companyEmail', '$clientWebsite', 1; )";
+            $sql = "INSERT INTO `pending_clients` (`ID`, `trn`, `companyName`, `clientName`, `clientAddress`, `clientCounty`, `clientParish`, `clientCity`, `clientContact`, `clientEmail`, `clientWebsite`, `attempts`,`active`) 
+            VALUES (NULL, '$trn', '$companyName', '$clientName', '$companyAddress', '$companyCounty', '$companyParish', '$companyCity',  '$companyNumber', '$companyEmail', '$clientWebsite', 1, 1;)";
             if(mysqli_query($conn, $sql))
             {
                 echo "Insertion successful";

@@ -9,7 +9,7 @@
             if(empty(test_input($value)))
             {
                 echo"A field is empty ".$key."<br>";
-                var_dump($key);
+                //var_dump($key);
                 $errorFlag=1;
             }
             else
