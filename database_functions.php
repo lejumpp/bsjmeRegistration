@@ -44,19 +44,24 @@
     {
         if(check_client_exist($conn,$trn))
         {
-            update_client_attempt($conn, $trn);
+            if(update_client_attempt($conn, $trn)){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         else
         {
             $sql = "INSERT INTO `pending_clients` (`ID`, `trn`, `companyName`, `clientName`, `clientAddress`, `clientCounty`, `clientParish`, `clientCity`, `clientContact`, `clientEmail`, `clientWebsite`, `attempts`,`active`) 
-            VALUES (NULL, '$trn', '$companyName', '$clientName', '$companyAddress', '$companyCounty', '$companyParish', '$companyCity',  '$companyNumber', '$companyEmail', '$clientWebsite', 1, 1;)";
+            VALUES (NULL, '$trn', '$companyName', '$clientName', '$companyAddress', '$companyCounty', '$companyParish', '$companyCity',  '$companyNumber', '$companyEmail', '$companyWebsite', 1, 1)";
             if(mysqli_query($conn, $sql))
             {
-                echo "Insertion successful";
+               return true;
             }
             else
             {
-                echo "Insertion unsuccessful";
+                return false;
             }        
         }
         
@@ -83,11 +88,27 @@
         $sql = "UPDATE `pending_clients` SET `attempts` = `attempts` + 1 WHERE `trn` = '$trn'";
         if(mysqli_query($conn, $sql))
         {
-            echo "Update successful";
+            return true;
         }
         else
         {
-            echo "Update unsuccessful";
+            return false;
+        }
+    }
+
+    function insert_responses($conn,$trn,$questionIdArray,$responesArray)
+    {
+        for($x=0; $x<count($questionIdArray); $x++)
+        {
+                $sql = "INSERT INTO `pcresponses` (`id`, `pdTRN`, `rId`, `questionResponse`) VALUES (NULL, '$trn', '$questionIdArray[$x]', '$responesArray[$x]')";
+                if(mysqli_query($conn, $sql))
+                {
+                    echo '<script>console.log("Saved Successfully!"); </script>';
+                }
+                else{
+                    echo '<script>console.log("Save was not successful!"); </script>';
+                    return false;
+                }
         }
     }
 ?>

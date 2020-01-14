@@ -142,7 +142,7 @@
                                     <div class='row'>
                                         <div class='col'>
                                         <div class='hint'>
-                                            <a href='#' data-toggle='tooltip' data-placement='right' title='".$row["questionDescription"]."'><label for='question".$row["id"]."'>".$quest_no.". ".$row["question"]."</label></a>
+                                            <a href='#' data-toggle='tooltip' data-placement='right' title='".$row["questionDescription"]."'><label for='".$row["id"]."'>".$quest_no.". ".$row["question"]."</label></a>
                                         </div>
                                             ";
                                             if($row["questionType"]=="RADIO")
@@ -153,7 +153,7 @@
                                                     echo"
                                                     <div class='form-check-inline'>
                                                         <label class='form-check-label'>
-                                                            <input type='radio' checked class='form-check-input' name='question".$row["id"]."'  value='".strtolower($choice)."'>".ucfirst(strtolower($choice))."
+                                                            <input type='radio' checked class='form-check-input' name='".$row["id"]."'  value='".strtolower($choice)."'>".ucfirst(strtolower($choice))."
                                                         </label>
                                                     </div>
                                                     ";
@@ -167,7 +167,7 @@
                                                     echo"
                                                     <div class='form-check-inline'>
                                                         <label class='form-check-label'>
-                                                            <input type='checkbox' class='form-check-input' name='question".$row["id"]."'  value='".strtolower($choice)."'>".strtolower($choice)."
+                                                            <input type='checkbox' class='form-check-input' name='".$row["id"]."'  value='".strtolower($choice)."'>".strtolower($choice)."
                                                         </label>
                                                     </div>
                                                     ";
@@ -176,7 +176,7 @@
                                             elseif($row["questionType"]=="TEXT" || $row["questionType"]=="TEXTAREA" )
                                             {
                                                 echo"
-                                                <textarea style='overflow:auto;resize:none' class='form-control' rows='1' name='question".$row["id"]."' ></textarea>
+                                                <textarea style='overflow:auto;resize:none' class='form-control' rows='1' name='".$row["id"]."' ></textarea>
                                                 ";
                                             }
                                             elseif($row["questionType"]=="LIST" )
@@ -184,7 +184,7 @@
                                                 $choices = json_decode($row["questionChoice"],true);
                                                 echo"
                                                 <div class='form-group'>
-                                                    <select class='form-control' name='question".$row["id"]."'>
+                                                    <select class='form-control' name='".$row["id"]."'>
                                                         <option value='' selected>Select One</option>";
                                                         foreach($choices as $choice)
                                                         {
