@@ -42,7 +42,7 @@
                     <img src="./images/bsjLogo.jpg" alt="bsjLogo">
                 </a>
                 <br>
-                <form class="form-group" id="clientRegForm" action="<?php echo htmlspecialchars("./validation.php");?>" method="POST">
+                <form class="form-group" id="clientRegForm" action="<?php echo htmlspecialchars("./validation.php");?>" method="POST" enctype="multipart/form-data">
                     <!--First page of form tat will capture information about the client-->
                     <div class="tab">
                         <br>

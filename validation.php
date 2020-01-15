@@ -51,18 +51,28 @@
             }
             else //this else is for the insertion function in database_functions
             {
+                
                 echo"else statement";
                 if(insert_client($conn,$trn,$companyName,$clientName,$companyAddress,$companyCounty,$companyParish,
                 $companyCity,$companyNumber,$companyEmail,$companyWebsite))
                 {
                     if(!insert_responses($conn,$trn,$questionArray,$responseArray)){
-                        echo"<br>no errors";
+                        echo"<br>no errors inserting response";
+                        if(saveFile())
+                        {
+                            echo"No error occured";
+                        }
+                        else
+                        {
+                            echo"Error occured";
+                        }
                     }
                     else{
-                        echo"<br>erros";
+                        echo"<br>errors inserting responses";
                     }
                 }
-                else{
+                else
+                {
                     echo "<br>Error in adding a new pending client";
                 }
             }
@@ -74,5 +84,40 @@
         $data = trim($data);
         $data = htmlspecialchars($data);
         return $data;
+    }
+
+    function saveFile()
+    {
+        //echo $committmentLetter;
+        $fileName= $_FILES['committmentLetter']['name'];
+        if($fileName!=null)
+        {
+            $path=insert_document($conn,$trn,$fileName);
+            if($path)
+            {
+                //save the file locally on the machine
+                $targetFile = $path . basename($_FILES["committmentLetter"]["name"]);
+                echo "<br>".$targetFile;
+                if(move_uploaded_file($_FILES["committmentLetter"]["tmp_name"], $targetFile))
+                {
+                    echo '<script>console.log("Saved Successfully!"); </script>';
+                    return true;
+                }
+                else
+                {
+                    echo '<script>console.log("Did not save Successfully!"); </script>';
+                    return false;
+                }
+            }
+            else
+            {
+                echo '<script>console.log("Did not save Successfully!"); </script>';
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 ?>

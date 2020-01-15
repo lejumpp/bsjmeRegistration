@@ -111,4 +111,30 @@
                 }
         }
     }
+
+    function insert_document($conn, $trn, $document)
+    {
+        
+        $sql ="INSERT INTO `pcdocument`(`id`, `trn`, `docname`) VALUES (NULL, '$trn', '$document')";
+        if(mysqli_query($conn, $sql))
+        {
+            echo '<script>console.log("Saved Successfully!"); </script>';
+            $path = "../../bsjme/upload/documents/".$trn."/";
+            if(!is_dir($path))//if path doesn't exist already
+            {
+                mkdir($path,0755,TRUE);
+                return $path;
+            }
+            else
+            {
+                echo "<br>directory already exist";
+                return $path;
+            }
+        }
+        else
+        {
+            echo '<script>console.log("Save was not successful!"); </script>';
+            return false;
+        }
+    }
 ?>
