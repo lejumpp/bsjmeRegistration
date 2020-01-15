@@ -45,10 +45,6 @@
                 echo"An error has occured 3";
                 $errorFlag=1;
             }
-            if(!filter_var($companyWebsite, FILTER_VALIDATE_URL)){
-                echo"An error has occured 4";
-                $errorFlag=1;
-            }
             else //this else is for the insertion function in database_functions
             {
                 
@@ -58,7 +54,7 @@
                 {
                     if(!insert_responses($conn,$trn,$questionArray,$responseArray)){
                         echo"<br>no errors inserting response";
-                        if(saveFile())
+                        if(saveFile($conn,$trn))
                         {
                             echo"No error occured";
                         }
@@ -86,7 +82,7 @@
         return $data;
     }
 
-    function saveFile()
+    function saveFile($conn,$trn)
     {
         //echo $committmentLetter;
         $fileName= $_FILES['committmentLetter']['name'];
