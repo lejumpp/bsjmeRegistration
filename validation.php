@@ -18,6 +18,7 @@
             else
             {
                 $$key = test_input($value);
+                $_SESSION[$key] = test_input($value);
                 if(is_numeric($key))
                 {
                     array_push($questionArray,$key);
