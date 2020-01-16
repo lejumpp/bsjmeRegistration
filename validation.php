@@ -1,6 +1,7 @@
 <?php
+    session_start();
     include 'database_functions.php';
-    if($_SERVER["REQUEST_METHOD"]=="POST")
+    if(!$_SERVER["REQUEST_METHOD"]=="POST")
     {
         $responseArray=[];
         $questionArray=[];
@@ -74,6 +75,10 @@
             }
         }
     }
+    else
+    {
+        successScreen();
+    }
 
     function test_input($data)
     {
@@ -115,5 +120,69 @@
         {
             return false;
         }
+    }
+
+    function successScreen()
+    {
+        ?>
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>BSJ REGISTRATION</title>
+                <!-- Latest compiled and minified CSS -->
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+                <!-- jQuery library -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <!-- Popper JS -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                <!-- Latest compiled JavaScript -->
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+                <!--Main Style Sheet-->
+                <link rel="stylesheet" href="./css/main.css">
+                <style>
+                    body 
+                    {
+                        /* background-color: #f1f1f1; */
+                        background-image: url("./images/background.jpg");
+                        /* background-repeat: no-repeat; */
+                    }
+                    label
+                    {
+                        color: black;
+                    }
+                    .container{
+                        position: absolute;
+                        margin: auto;
+                        top: 20%;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                    }
+                    .text-box{
+                        width: 80%;
+                        padding: 15px;
+                        background-color: white;
+                        box-shadow: 10px 10px 5px grey;
+                        word-wrap: break-word;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container" align= "center">
+                    <a href="https://www.bsj.org.jm/">
+                        <img src="./images/bsjLogo.jpg" alt="bsjLogo">
+                    </a>
+                    <br>
+                    <div class="text-box">
+                        <h1>Thank You for Your Interest!</h1>
+                        <h4>Your information has been sent to a coordinator that will make contact with you via email or call.</h4>
+                    </div>
+                </div>
+            </body>
+        </html>
+        <?php
     }
 ?>

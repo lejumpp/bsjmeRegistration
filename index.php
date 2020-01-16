@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include 'database_functions.php';
     $requirement_results = get_requirementQuesitons($conn);
     $standard_results = get_standards($conn);
@@ -58,7 +59,7 @@
                             </div>
                             <div class="col">
                                     <label for="clientName">Client Name:</label>
-                                    <input type="text" class="form-control" name="clientName" placeholder="Nicholas Jumpp">
+                                    <input type="text" class="form-control" name="clientName" placeholder="John Doe">
                             </div>
                         </div>
                         <br>
@@ -134,7 +135,7 @@
                             }
                             else
                             {
-                                echo "<p><span class='error'>All fields are required,<br>Hover on question for description</span></p>";
+                                echo "<p><span class='error'>All fields are required,<br>Hover over question for description</span></p>";
                                 while($row = mysqli_fetch_assoc($requirement_results))
                                 {
                                     $choices=array();
