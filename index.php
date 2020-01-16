@@ -1,5 +1,13 @@
 <?php
     session_start();
+    if((isset($_SESSION['errFlag'])) && ($_SESSION['errFlag'])==1) //if the session error flag exist and is equal to 1
+	{
+		//var_dump($_SESSION);
+		foreach($_SESSION as $key => $value)
+		{
+			$$key = $value;
+		}
+	}
     include 'database_functions.php';
     $requirement_results = get_requirementQuesitons($conn);
     $standard_results = get_standards($conn);
@@ -51,22 +59,22 @@
                         <div class="row">
                             <div class="col">
                                 <label for="trn">TRN #:</label>
-                                <input type="number" class="form-control" name="trn" placeholder="123456789">
+                                <input type="number" class="form-control" name="trn" placeholder="123456789" value="<?php if(isset($trn)){echo $trn;} ?>">
                             </div>
                             <div class="col">
                                     <label for="companyName">Company Name:</label>
-                                    <input type="text" class="form-control" name="companyName" placeholder="Bureau of Standards">
+                                    <input type="text" class="form-control" name="companyName" placeholder="Bureau of Standards" value="<?php if(isset($companyName)){echo $companyName;} ?>">
                             </div>
                             <div class="col">
                                     <label for="clientName">Client Name:</label>
-                                    <input type="text" class="form-control" name="clientName" placeholder="John Doe">
+                                    <input type="text" class="form-control" name="clientName" placeholder="John Doe" value="<?php if(isset($clientName)){echo $clientName;} ?>">
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col">
                                 <label for="companyaddress">Address:</label>
-                                <input type="text" class="form-control" name="companyAddress"   placeholder="6 Winchester Road">
+                                <input type="text" class="form-control" name="companyAddress"   placeholder="6 Winchester Road" value="<?php if(isset($companyAddress)){echo $companyAddress;} ?>">
                             </div>
                         </div>
                         <br>
@@ -102,22 +110,22 @@
                             </div>
                             <div class="col">
                                 <label for="companyCity">City:</label>
-                                <input type="text" class="form-control" name="companyCity"   placeholder="Kingston 10">
+                                <input type="text" class="form-control" name="companyCity" placeholder="Kingston 10" value="<?php if(isset($companyCity)){echo $companyCity;} ?>">
                             </div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col">
                                 <label for="companyNumber">Contact:</label>
-                                <input type="text" class="form-control" name="companyNumber"   placeholder="1-xxx-xxx-xxxx">
+                                <input type="text" class="form-control" name="companyNumber" placeholder="1-xxx-xxx-xxxx" value="<?php if(isset($companyNumber)){echo $companyNumber;} ?>">
                             </div>
                             <div class="col">
                                 <label for="companyEmail">Email:</label>
-                                <input type="email" class="form-control" name="companyEmail"   placeholder="company@example.org">
+                                <input type="email" class="form-control" name="companyEmail" placeholder="company@example.org" value="<?php if(isset($companyEmail)){echo $companyEmail;} ?>">
                             </div>
                             <div class="col">
                                 <label for="companyWebsite">Website:</label>
-                                <input type="text" class="form-control" name="companyWebsite"   placeholder="https://www.bsj.org.jm/">
+                                <input type="text" class="form-control" name="companyWebsite" placeholder="https://www.bsj.org.jm/" value="<?php if(isset($companyWebsite)){echo $companyWebsite;} ?>">
                             </div>
                         </div>
                     </div>

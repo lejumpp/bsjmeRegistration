@@ -1,11 +1,12 @@
 <?php
     session_start();
     include 'database_functions.php';
-    if(!$_SERVER["REQUEST_METHOD"]=="POST")
+    if($_SERVER["REQUEST_METHOD"]=="POST")
     {
         $responseArray=[];
         $questionArray=[];
         $errorFlag=null;
+        $_SESSION['errFlag']=null;
         foreach($_POST as $key => $value)
         {
             ///echo $key."<br>";
@@ -14,6 +15,7 @@
                 echo"A field is empty ".$key."<br>";
                 //var_dump($key);
                 $errorFlag=1;
+                $_SESSION['errFlag']=1;
             }
             else
             {
@@ -38,14 +40,17 @@
             if(strlen($trn)!=9){
                 echo"An error has occured 1";
                 $errorFlag=1;
+                $_SESSION['errFlag']=1;
             }
             if(!preg_match("/^1-[1-9]{3}-[1-9]{3}-[0-9]{4}$/",$companyNumber)){
                 echo"An error has occured 2";
                 $errorFlag=1;
+                $_SESSION['errFlag']=1;
             }
             if(!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $companyEmail)){
                 echo"An error has occured 3";
                 $errorFlag=1;
+                $_SESSION['errFlag']=1;
             }
             else //this else is for the insertion function in database_functions
             {
