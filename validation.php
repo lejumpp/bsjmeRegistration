@@ -185,12 +185,18 @@
                     </div>
                 </div>
             </body>
+            <script>
+                setTimeout(redirectToMainPage,5000);
+                function redirectToMainPage(){
+                    window.location.replace("https://www.bsj.org.jm/");
+                }
+            </script>
         </html>
         <?php
     }
 
     function errorPage()
     {
-        
+
     }
 ?>
