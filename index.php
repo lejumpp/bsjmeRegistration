@@ -11,6 +11,8 @@
     include 'database_functions.php';
     $requirement_results = get_requirementQuesitons($conn);
     $standard_results = get_standards($conn);
+    $county_results = get_county($conn);
+    $parish_results = get_parish($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,30 +84,29 @@
                             <div class="col">
                                 <label for="companyCounty">County:</label>
                                 <select name="companyCounty"   class="custom-select">
-                                    <option value="" selected>Select County</optionvalue="">
-                                    <option value="Cornwall">Cornwall</option>
-                                    <option value="Middlesex">Middlesex</option>
-                                    <option value="Surrey">Surrey</option>
+                                    <option value="" selected>Select County</option>
+                                    <?php
+                                    while($row = mysqli_fetch_assoc($county_results))
+                                    {
+                                        echo "
+                                        <option value='".$row['id']."'>".$row['name']."</option>
+                                        ";
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="col">
                                 <label for="companyParish">Parish:</label>
                                 <select name="companyParish" class="custom-select"  >
                                     <option value="" selected>Select Parish</option>
-                                    <option value="St. Thomas">St. Thomas</option>
-                                    <option value="St. Andrew">St. Andrew</option>
-                                    <option value="Kingston">Kingston</option>
-                                    <option value="St. Catherine">St. Catherine</option>
-                                    <option value="Clarendon">Clarendon</option>
-                                    <option value="Manchester">Manchester</option>
-                                    <option value="St. Elizabeth">St. Elizabeth</option>
-                                    <option value="Westmoreland">Westmoreland</option>
-                                    <option value="Hanover">Hanover</option>
-                                    <option value="St. James">St. James</option>
-                                    <option value="Trelawny">Trelawny</option>
-                                    <option value="St. Ann">St. Ann</option>
-                                    <option value="St. Mary">St. Mary</option>
-                                    <option value="Portland">Portland</option>
+                                    <?php
+                                    while($row = mysqli_fetch_assoc($parish_results))
+                                    {
+                                        echo "
+                                        <option value='".$row['id']."'>".$row['name']."</option>
+                                        ";
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="col">

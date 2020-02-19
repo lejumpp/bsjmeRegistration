@@ -39,6 +39,34 @@
         }
     }
 
+    function get_county($conn)
+    {
+        $sql = "SELECT * FROM `county`";
+        $results = mysqli_query($conn,$sql);
+        if(mysqli_num_rows($results)>0)
+        {
+            return $results;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    function get_parish($conn)
+    {
+        $sql = "SELECT * FROM `parish`";
+        $results = mysqli_query($conn,$sql);
+        if(mysqli_num_rows($results)>0)
+        {
+            return $results;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     function insert_client($conn,$trn,$companyName,$clientName,$companyAddress,$companyCounty,$companyParish,
                             $companyCity,$companyNumber,$companyEmail,$companyWebsite)
     {
