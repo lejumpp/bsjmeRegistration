@@ -72,7 +72,8 @@
     {
         if(check_client_exist($conn,$trn))
         {
-            if(update_client_attempt($conn, $trn)){
+            if(update_client_attempt($conn, $trn))
+            {
                 return true;
             }
             else{
@@ -81,8 +82,9 @@
         }
         else
         {
-            $sql = "INSERT INTO `pending_clients` (`ID`, `trn`, `companyName`, `clientName`, `clientAddress`, `clientCounty`, `clientParish`, `clientCity`, `clientContact`, `clientEmail`, `clientWebsite`, `attempts`,`active`) 
-            VALUES (NULL, '$trn', '$companyName', '$clientName', '$companyAddress', '$companyCounty', '$companyParish', '$companyCity',  '$companyNumber', '$companyEmail', '$companyWebsite', 1, 1)";
+            $sql = "INSERT INTO `pending_clients` (`id`, `trn`, `companyName`, `clientName`, `clientAddress`, `clientCounty`, `clientParish`, `clientCity`, `clientContact`, `clientEmail`, `clientWebsite`, `attempts`,`active`)
+            VALUES (NULL, '$trn', '$companyName', '$clientName', '$companyAddress', '$companyCounty', '$companyParish', '$companyCity',  '$companyNumber', '$companyEmail', '$companyWebsite', 1, 3)";
+            
             if(mysqli_query($conn, $sql))
             {
                return true;
@@ -155,7 +157,7 @@
             }
             else
             {
-                echo "<br>directory already exist";
+                echo '<script>console.log("Directory already exist!"); </script>';
                 return $path;
             }
         }

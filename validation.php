@@ -12,15 +12,13 @@
             ///echo $key."<br>";
             if(empty(test_input($value)))
             {
-                echo"A field is empty ".$key."<br>";
-                //var_dump($key);
                 $errorFlag=1;
                 $_SESSION['errFlag']=1;
             }
             else
             {
                 $$key = test_input($value);
-                $_SESSION[$key] = test_input($value);
+                //$_SESSION[$key] = test_input($value);
                 if(is_numeric($key))
                 {
                     array_push($questionArray,$key);
@@ -28,8 +26,8 @@
                 }
             }
         }
-        var_dump($questionArray);
-        var_dump($responseArray);
+        // var_dump($questionArray);
+        // var_dump($responseArray);
         if($errorFlag==1)
         {
             echo"An error has occured";
@@ -54,36 +52,36 @@
             }
             else //this else is for the insertion function in database_functions
             {
-                
-                echo"else statement";
                 if(insert_client($conn,$trn,$companyName,$clientName,$companyAddress,$companyCounty,$companyParish,
                 $companyCity,$companyNumber,$companyEmail,$companyWebsite))
                 {
-                    if(!insert_responses($conn,$trn,$questionArray,$responseArray)){
-                        echo"<br>no errors inserting response";
+                    echo '<script>console.log("Client Saved Successfully!"); </script>';
+                    if(insert_responses($conn,$trn,$questionArray,$responseArray)==null)
+                    {
                         if(saveFile($conn,$trn))
                         {
-                            echo"No error occured";
+                            echo '<script>console.log("Save successful!"); </script>';
                         }
                         else
                         {
-                            echo"Error occured";
+                            $errorFlag=1;
                         }
                     }
-                    else{
-                        echo"<br>errors inserting responses";
+                    else
+                    {
+                        $errorFlag=1;
                     }
                 }
                 else
                 {
-                    echo "<br>Error in adding a new pending client";
+                    $errorFlag=1;
+                }
+                if($errorFlag!=1)
+                {
+                    successScreen();
                 }
             }
         }
-    }
-    else
-    {
-        successScreen();
     }
 
     function test_input($data)
@@ -104,10 +102,9 @@
             {
                 //save the file locally on the machine
                 $targetFile = $path . basename($_FILES["committmentLetter"]["name"]);
-                echo "<br>".$targetFile;
                 if(move_uploaded_file($_FILES["committmentLetter"]["tmp_name"], $targetFile))
                 {
-                    echo '<script>console.log("Saved Successfully!"); </script>';
+                    echo '<script>console.log("Document Saved Successfully!"); </script>';
                     return true;
                 }
                 else
@@ -190,5 +187,10 @@
             </body>
         </html>
         <?php
+    }
+
+    function errorPage()
+    {
+        
     }
 ?>
