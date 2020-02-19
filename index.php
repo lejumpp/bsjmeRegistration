@@ -1,13 +1,4 @@
 <?php
-    session_start();
-    if((isset($_SESSION['errFlag'])) && ($_SESSION['errFlag'])==1) //if the session error flag exist and is equal to 1
-	{
-		//var_dump($_SESSION);
-		foreach($_SESSION as $key => $value)
-		{
-			$$key = $value;
-		}
-	}
     include 'database_functions.php';
     $requirement_results = get_requirementQuesitons($conn);
     $standard_results = get_standards($conn);
