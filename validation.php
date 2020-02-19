@@ -180,10 +180,10 @@
                 </div>
             </body>
             <script>
-                setTimeout(redirectToMainPage,10000);
-                function redirectToMainPage(){
-                    window.location.replace("https://www.bsj.org.jm/");
-                }
+                // setTimeout(redirectToMainPage,10000);
+                // function redirectToMainPage(){
+                //     window.location.replace("https://www.bsj.org.jm/");
+                // }
             </script>
         </html>
         <?php

@@ -72,7 +72,7 @@
     {
         if(check_client_exist($conn,$trn))
         {
-            if(update_client_attempt($conn, $trn))
+            if(update_client($conn, $trn))
             {
                 return true;
             }
@@ -113,7 +113,7 @@
 
     //confirm whether when a client is registering if they will use one trn 
     // or is it a case where different different branches/ departments of the client will be wanting a standard
-    function update_client_attempt($conn, $trn)
+    function update_client($conn, $trn)
     {
         $sql = "UPDATE `pending_clients` SET `attempts` = `attempts` + 1 WHERE `trn` = '$trn'";
         if(mysqli_query($conn, $sql))
@@ -128,17 +128,43 @@
 
     function insert_responses($conn,$trn,$questionIdArray,$responesArray)
     {
-        for($x=0; $x<count($questionIdArray); $x++)
+        $sql = "SELECT * FROM `pcresponses` WHERE `pdTRN` = '$trn'";
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result) > 0)
         {
-                $sql = "INSERT INTO `pcresponses` (`id`, `pdTRN`, `rId`, `questionResponse`) VALUES (NULL, '$trn', '$questionIdArray[$x]', '$responesArray[$x]')";
-                if(mysqli_query($conn, $sql))
+            while($row = mysqli_fetch_assoc($result))
+            {
+                for($x=0; $x<count($questionIdArray); $x++)
                 {
-                    echo '<script>console.log("Saved Successfully!"); </script>';
+                    if($row['rId']==$questionIdArray[$x])
+                    {
+                        echo $row['rId'];
+                        $sql = "UPDATE `pcresponses` SET `id`=NULL,`pdTRN`='$trn',`rId`='$questionIdArray[$x]',`questionResponse`='$responesArray[$x]' WHERE `pdTRN`='$trn' AND `rId`='$$questionIdArray[$x]'";
+                        if(mysqli_query($conn, $sql))
+                        {
+                            echo '<script>console.log("Updated response Successfully!"); </script>';
+                        }
+                        else
+                        {
+                            echo '<script>console.log("Updated response was Unsuccessfull!"); </script>';
+                            return false;
+                        }
+                    }
                 }
-                else{
-                    echo '<script>console.log("Save was not successful!"); </script>';
-                    return false;
-                }
+                // $sql = "INSERT INTO `pcresponses` (`id`, `pdTRN`, `rId`, `questionResponse`) VALUES (NULL, '$trn', '$questionIdArray[$x]', '$responesArray[$x]')";
+                // if(mysqli_query($conn, $sql))
+                // {
+                //     echo '<script>console.log("Saved Successfully!"); </script>';
+                // }
+                // else{
+                //     echo '<script>console.log("Save was not successful!"); </script>';
+                //     return false;
+                // }
+            }
+        }
+        else
+        {
+
         }
     }
 
